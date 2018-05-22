@@ -4166,12 +4166,13 @@ static switch_call_cause_t user_outgoing_channel(switch_core_session_t *session,
 		}
 	}
 	
-//2018-05-21 start
+//2018-05-21 start  
 	if ((x_params = switch_xml_child(x_user, "variables"))) {
 		for (x_param = switch_xml_child(x_params, "variable"); x_param; x_param = x_param->next) {
 			const char *pvar = switch_xml_attr(x_param, "name");
 			const char *val = switch_xml_attr(x_param, "value");
 
+			//实时视频获取不到abc所以可以排除
 			if( (NULL != strstr(outbound_profile->caller_id_number,"a")) )	
 			{
 				if ( (0 == strcmp(pvar, "predefined_group_call_limit")) && ((0 == strcmp(val, "2")) || (0 == strcmp(val, "3"))) ) {
