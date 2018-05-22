@@ -722,8 +722,8 @@ typedef struct conference_obj {
 	////////////////////////////    end    /////////////////
 
 	//2018-05-18 start
-	const char *poc_mode;
-	const char *poc_originate_number;
+	const char *poc_mode;//对讲模式
+	const char *poc_originate_number;//对讲发起人
 	//2018-05-18 end
 
 } conference_obj_t;
