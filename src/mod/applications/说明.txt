@@ -1,0 +1,39 @@
+mod_videoshare7-5.tar.gz  这个版本已经把添加成员和退出成员是有发送sip message消息
+mod_videoshare7-6-1.tar.gz  这个版本添加了判断成员如果已经在会议里面就不会再添加的情况
+17-10-24-zhiqian-mod_videoshare.tar.gz  添加了禁听 和 禁言 的功能
+
+17-10-24-from-17-10-20-mod_conference-ok.tar.gz  这个版本有解决对讲退奔溃的问题，主要问题出在正在申请话语权的人退出是，会出现channel为野指针
+17-10-25-mod_conference.tar.gz 	这个版本有解决对讲退奔溃的问题，主要问题出在正在申请话语权的人退出是，会出现channel为野指针   同时减少了一些打印日志信息
+
+17-10-27-mod_conference.tar.gz  这个版本是在 member_add 和 member_del 里面多了判断 if (!conference_utils_member_test_flag(member, 
+MFLAG_NOCHANNEL))，不然在录音的时候会出错
+
+17-10-27-mod_videoshare.tar.gz  这个版本是在 member_add 和 member_del 里面多了判断 if (!conference_utils_member_test_flag(member, 
+MFLAG_NOCHANNEL))，不然在录音的时候会出错
+
+17-10-27-2-mod_conference.tar.gz  添加了 conference 会议名称 memberlist 的http请求接口（api） 这个是对讲上用到的
+
+17-11-13-mod_conference.tar.gz  在获取channels的时候有判断channels通道能不能使用  本来在memberjoin后面有加优先级的和members后面有加优先级的，都暂时屏蔽掉
+
+17-11-16-wanshang-mod_conference.tar.gz  这个版本有针对的几个bug稍微调整了下，然后拿去测试
+
+17-11-16-wanshang-mod_videoshare.tar.gz  这个版本修改了视频分享时，终端挂断，该视频分享无法自动挂断的问题
+
+17-11-20-mod_conference.tar.gz 这个版本有添加了发送成员进来的日志 但是还有一点，如果最后一个成员退出的消息发不出去，
+
+17-11-21-1-mod_conference.tar.gz  把主呼的人退出后，该会议结束 这个已经完成，还需要测试
+
+17-11-24-mod_conference.tar.gz   在单呼的情况下，如果发起呼叫，如果对方没有正常接听，则会报相关的原因给起呼方
+
+17-12-4-mod_conference.tar.gz    添加了临时组呼的时候，如果发起临时组呼的人退出则，该会议结束  在加上如果组已经没有成员的时候就发送自己退出的消息，这个是由于android收不到而补上的机制  目前服务器使用这个包 2017-11-29
+
+18-4-26-mod_conference.tar.gz   这个版本在 member_del 的函数中会崩溃 有多一层判断
+
+18-5-2-改到一半-mod_conference.tar.gz   这个版本 conference_loop的文件中 switch_snprintf(member->conference->poc_call_number, sizeof(member->conference->poc_call_number), "%s", s_sen_disp ); 这行代码写错了，应该是 switch_snprintf(member->conference->senior_disp, sizeof(member->conference->senior_disp), "%s", s_sen_disp );
+
+18-5-11-mod_conference.tar.gz  这个版本是改高级调度员 只有一个调度员的，后面版本要要改实现支持多个
+
+18-5-15-mod_conference.tar.gz    这个版本支持多个高级调度员 但是还差高级调度员进来的时候，要广播当前的在线所有成员
+
+18-5-17-mod_conference.tar.gz    这个版本支持多个高级调度员 修复了高级调度员进来的时候没有广播给这个高级调度员当前的在线成员   还差高级调度员进来的消息相互之间的消息是否可见还没有做
+
