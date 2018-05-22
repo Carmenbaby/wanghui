@@ -4181,7 +4181,7 @@ static switch_call_cause_t user_outgoing_channel(switch_core_session_t *session,
 				goto done;
 			    }
 			}
-			if( (NULL != strstr(outbound_profile->caller_id_number,"b")) )
+			else if( (NULL != strstr(outbound_profile->caller_id_number,"b")) )
 			{
 				if ( (0 == strcmp(pvar, "single_call_limit")) && ((0 == strcmp(val, "2")) || (0 == strcmp(val, "3"))) ) {
 				switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "b #pvar= %s,#val=%s", pvar, val);
@@ -4189,13 +4189,22 @@ static switch_call_cause_t user_outgoing_channel(switch_core_session_t *session,
 				goto done;
 			    }
 			}
-			if( (NULL != strstr(outbound_profile->caller_id_number,"c")) )
+			else if( (NULL != strstr(outbound_profile->caller_id_number,"c")) )
 			{
 				if ( (0 == strcmp(pvar, "temp_group_call_limit")) && ((0 == strcmp(val, "2")) || (0 == strcmp(val, "3"))) ) {
 				switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "c #pvar= %s,#val=%s", pvar, val);
 				cause = SWITCH_CAUSE_INCOMING_CALL_BARRED;
 				goto done;
-			   }
+			    }
+			}
+			else
+			{	
+				//实时视频限制呼入
+				if ( (0 == strcmp(pvar, "video_call_limit")) && ((0 == strcmp(val, "2")) || (0 == strcmp(val, "3"))) ) {
+				switch_log_printf(SWITCH_CHANNEL_SESSION_LOG(session), SWITCH_LOG_ERROR, "video #pvar= %s,#val=%s", pvar, val);
+				cause = SWITCH_CAUSE_INCOMING_CALL_BARRED;
+				goto done;
+			    }
 			}
 			
 		}
